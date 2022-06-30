@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      th:replace="layout :: layout(~{::title}, ~{::section})" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>JagoronBD</title>
+</head>
+<body>
+<section>
+
+    <br><br><br>
+    <br><br><br>
+
+    <div sec:authorize="isAnonymous()" >
+        <h2 style="color:green">User Management</h2>
+        <a href="/login">Login</a> <br>
+        <a href="/register">Register as User</a>
+    </div>
+
+    <main class="container">
+        <!--box-shadow: 0px 4px 4px #dedcdb; -->
+
+        <div class="row">
+
+            <div class="col-md-6" style="line-height: 30px">
+                <h1 class="display-3" style="font-family: Product Sans, Arial; margin-top: 20%";>Jagoron</h1>
+                <h4 style="font-family: Product Sans, Arial; ">Start Protesting Against All Violance!</h4>
+                <p>Don't Wait for Others. Start Learning Self Defense From Today. Collect Necessary Elements for Self Defense. Enroll to Free Courses.
+                    If Needed Then Call 999 (The National Emergency Number) Now!
+                </p>
+                <a button type="button" style="margin-top: 7px;" class="btn btn-danger " href="tel:999">Call 999</a>
+                <a button type="button" style="margin-top: 7px;" class="btn btn-primary " href="tel:109">Call 109</a>
+                <button type="button" style="margin-top: 7px;" onclick="document.getElementById('id01').style.display='block'" class="btn btn-success ">Contact Police</button>
+            </div>
+
+            <div id="id01" class="modal">
+
+                <form class="modal-content animate" action="action_page.php" method="post">
+
+
+                    <div class="container2">
+                        <label for="sub" style="color:black;"><b>Subject</b></label>
+                        <input class="form-control" type="text" placeholder="Enter Subject"  name="subject" required>
+
+
+                        <label for="eml" style="color:black;"><b>Email</b></label>
+
+                        <input class="form-control" type="email" placeholder="Enter Your Email"  name="email" required  >
+
+                        <label for="sms" style="color:black;"><b>Your Message</b></label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Your Email" name="message" required></textarea>
+                        <button type="submit" class="btn btn-primary btn-sm btn-block" style="margin-top: 7px;">Send</button>
+                    </div>
+
+                    <div class="container" style="background-color:#f1f1f1; height: 45px">
+
+
+
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn btn-danger btn-sm" style="margin-top: 7px;">Cancel</button>
+
+
+
+                    </div>
+                </form>
+            </div>
+
+            <script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+
+            <div class="col-md-6" style="margin-top: 20px;">
+                <img src="Header.svg" width="100%" alt="header">
+            </div></div>
+
+
+
+        <div id="Principles" style=" margin-top: 5px;">
+            <div class="text-center mb-4 mt-4" >
+                <h2 class="display-4" style="font-family: Product Sans, Arial ;">You Need to Carry</h2>
+            </div>
+
+            <div class="row" style="margin-top: 80px;" >
+
+                <div class="col-lg-4" style="line-height: 30px"  th:each = "product : ${productList}">
+                    <span th:classappend="${product.logo}"> </span>
+
+                    <h4><span th:text="${product.name}"></span></h4>
+                    <p th:text="${product.description}"></p>
+                    <p sec:authorize="isAnonymous()"><a button type="button" class="btn btn-success btn-sm"  href="/login">Buy now</a> </p>
+                    <p  sec:authorize="isAuthenticated()"><a button type="button" class="btn btn-success btn-sm" th:href="${product.link}" >Buy Now</a></p>
+                </div>
+        </div>
+
+
+
+        <div id="Tutorials" style=" margin-top: 90px;">
+            <div class="text-center mb-4 mt-4" >
+                <h2 class="display-4" style="font-family: Product Sans; margin-bottom: 60px;">Self Defense Tutorials</h2>
+            </div>
+
+            <div class="row" id="portfolio" >
+                <div class="col-md-6 col-lg-4"  th:each="tutorial : ${tutorialList}">
+                    <div class="card mb-4 shadow-sm">
+                        <img th:src="${tutorial.image}" height="200px" alt="header">
+                        <div class="card-body">
+                            <p class="card-text" th:text="${tutorial.name}"></p>
+                            <p class="card-text" th:text="${tutorial.description}"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <p sec:authorize="isAnonymous()"><a button type="button" class="btn btn-success btn-sm"  href="/login">Watch now</a> </p>
+                                    <p  sec:authorize="isAuthenticated()"><a button type="button" class="btn btn-success btn-sm" th:href="${tutorial.link}" >Watch Now</a></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div th:replace="course/list.html :: course"></div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <p><a button type="button" class="btn btn-success btn-sm"  href="/courses">See more Courses</a> </p>
+                </div>
+            </div>
+
+
+
+        <div class="text-center mb-4 mt-4" id="freepdfs">
+            <h2 class="display-4" style="font-family: Product Sans, Arial ; margin-bottom: 60px;margin-top: 90px;">Read Self Defense Books</h2>
+        </div>
+        <div class="row" >
+            <div class="col-lg-2 col-md-3" style="line-height: 30px"  th:each = "book : ${bookList}">
+                <div class="card mb-4 shadow-sm">
+                    <div class="text-center mb-4 mt-4" >
+                        <i class="fa   fa-book fa-2x" ></i>
+
+                        <h5 th:text="${book.name}"></h5>
+                        <p th:text="${book.description}"></p>
+                        <a button type="button" class="btn btn-success btn-sm" href="https://www.pdfdrive.com/krav-maga-for-women-your-ultimate-program-for-self-defense-e176028574.html">Read</a>
+
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+
+        <div id = "massage" style="margin-top: 90px;">
+            <div class="row">
+
+                <div class="col-md-2 col-lg-3">
+                    <img src="Woman.svg" alt="founder" width="100%">
+
+                </div>
+                <div class="col-md-10 col-lg-9" style="line-height: 30px">
+                    <h2 class="display-4" style="font-family: Product Sans, Arial ;">Massage for Girls</h2>
+                    <br>
+                    <p style="font-size: 20px;"><i>" Always aim high, work hard, and care deeply about what you believe in. And, when you stumble, keep faith. And, when you’re knocked down, get right back up and never listen to anyone who says you can’t or shouldn’t go on." </i></p><br>
+                    <h4>- Hillary Rodham Clinton </h4>
+                    <br>
+                    <p style="font-size: 20px;"><i>"Don’t let anyone speak for you, and don’t rely on others to fight for you."</i></p><br>
+                    <h4>- Michelle Obama </h4>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div id="Strategies" style=" margin-top: 40px;">
+
+            <div class="text-center mb-4 mt-4" id="freepdfs">
+                <h2 class="display-4" style="font-family: Product Sans, Arial; margin-bottom: 60px;margin-top: 90px;">Self-Defense Strategies</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        1. TRUST YOUR INSTINCTS
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Too many women enroll in a self-defense class after they've been assaulted. When they recount the incident, they often say the same thing: "I had this bad feeling, but I told myself not to be paranoid," or "I knew I shouldn't have gone, but I didn't want to hurt his feelings."
+
+                                    If something doesn't feel right, it probably isn't safe — that's the bottom line. Many women have been conditioned to ignore the little voice that tells them trouble is coming. Your instinct is the best detector of danger. The next time you hear that little voice, listen to what it's saying.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        2. PRACTICE TARGET DENIAL
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Don't make yourself an accessible target. The outcome of a battle is often determined before the first blow is struck. When you have the opportunity to escape from a situation before it turns bad, take it. If an approaching person gives you the creeps, walk to the other side of the street. If an elevator door opens and the guy standing inside makes the hair on the back of your neck stand up, wait for the next elevator. Those actions aren't cowardly; rather, they're a smart way to eliminate danger.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        3. PRESENT YOURSELF WITH CONFIDENCE
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Be aware of the message your body sends to those around you. Like animals, human predators target those they consider the weakest or most vulnerable. Attackers search for women who appear frightened, confused or distracted. They look for women who walk with their head down and their hands stuffed in their pockets, or perhaps one who's overburdened with packages or distracted by children.
+                                    Remember that attackers do not want to bait a fight; they want an easy mark. By walking with confidence and awareness — looking around and keeping your head up and shoulders back — you'll dramatically reduce the likelihood of becoming a target in the first place.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        4. SET STRONG VERBAL BOUNDARIES
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Good verbal skills are an effective self-defense tool, one you're likely to use more frequently and successfully than any physical technique. When a predator engages you in conversation, he's actually "interviewing" you to see if you'll make a good victim. An experienced attacker is practiced at using his words to freeze you with fear, thus reducing the chance that you'll try to defend yourself.
+
+                                    Although an aggressive verbal confrontation can be terrifying, you have to be strong enough to show the attacker he's picked the wrong victim. If you stand tall, remain calm and respond confidently and assertively, you'll probably "fail" his interview. The power of your voice alone can cause him to seek an easier target.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFive">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        5. MAINTAIN A NON-CONFRONTATIONAL STANCE
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    In a self-defense situation, one of your secret weapons is the element of surprise. Most predators feel confident that you won't defend yourself, and you should capitalize on that misconception. If you assume a martial arts stance, it immediately tells the attacker that you know how to fight. In response, he's likely to be more aggressive.
+
+                                    Instead, use a confident, relaxed stance in which your hips and shoulders are forward, your arms are bent, and your hands are up and open. This conciliatory posture may mislead the attacker into thinking you're willing to comply. If it becomes necessary for you to strike, he probably won't be prepared for it.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingSix">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        6. KEEP A SAFE DISTANCE
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Everyone has a comfort zone or personal space. When an aggressor enters that zone, you're uncomfortable because you know you'd need that space if you had to fight back. When you're in an adrenalized state, you need a quarter of a second to react to an assault. This "reactionary gap" should be anticipated when you think about your comfort zone.
+
+                                    You should try to maintain approximately one to one-and-a-half arm lengths between yourself and the aggressor. If he starts closing in, you need to use verbal boundaries. If he still doesn't back off, it's time to get physical.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingSeven">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                        7. USE THE ELEMENT OF SURPRISE
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Most predators assume you cannot defend yourself. Therefore, you should take advantage of the element of surprise. If you're engaged in a conversation, you have the opportunity to use verbal skills and a non-confrontational stance to entice the aggressor into dropping his guard. If you're grabbed from behind, you must respond immediately. In either case, putting up a fight can surprise him and increase your chance of landing the first blow.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingEight">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                        8. KEEP YOUR TECHNIQUES SIMPLE
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    One of the main effects of an adrenaline release is the loss of fine motor skills. That means simple gestures such as unlacing your fingers or pulling your hands out of your pockets can become much more challenging. And the odds of your executing a beautiful joint lock or high kick rapidly dwindle.
+
+                                    No matter which martial art you practice, learn techniques that are basic and stick with them in a self-defense scenario. I recommend the following:
+                                    <ul>
+                                        <li> Heel-palm strike. Hitting with an open hand reduces the chance that you'll injure your hand and enables you to more easily attack from a non-confrontational stance in which you're holding your hands up and open while you set verbal boundaries. Then, if your attacker steps into your comfort zone — bang! — he gets it right in the face.</li>
+                                        <li>Eye strike. The eye strike can be used in a standing or prone position. Often, simply driving your fingers toward your assailant's eyes will cause him to recoil. Even if you don't make contact, it creates space to set up a more devastating blow.</li>
+                                        <li>Knee strike. This technique is recommended over any type of standing kick because it is easy to use and can be delivered while you stay centered and close to the ground — which is crucial when you're adrenalized. A knee to the groin can end a fight immediately. </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingNine">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                        9. DON'T PANIC IF YOU'RE KNOCKED DOWN
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    More often than not, women end up on the ground when they're assaulted. The good news is that most assailants are not skilled ground fighters; they're bullies who are used to knocking women down and forcing them to comply. Remember that the heel-palm strike and eye strike work well on the ground. It's a good idea to have a few kicks that work there, as well.
+
+                                    In particular, the side thrust kick functions in a variety of scenarios. If you're on the ground and your assailant is standing, it gives you an advantage because your legs are longer than his arms. That means he'll have to expose his body to your kick if he wants to reach you.
+
+                                    Knee strikes also function effectively on the ground. While you struggle with your attacker, he probably won't protect his groin. Once you see an opening, get close enough to strike upward into his crotch.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTen">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                        10. FOLLOW THROUGH
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    The fight isn't over until the threat no longer exists. Therefore, you must be 110-percent committed to the battle. If you fight back and then pause, you give up the initial advantage you gained from using the element of surprise.
+
+                                    Once your opponent knows you can fight, it becomes more difficult for you to prevail. To survive, you must continue your barrage until it's safe to stop striking and escape.
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div id = "saythanks" style="margin-top: 100px;">
+            <div class="row">
+                <div class="col-lg-6" >
+                    <img src="Wecando.svg" width="80%" alt="Women">
+
+                </div>
+
+                <div class="col-lg-6" style="line-height: 30px;">
+                    <h2 class="display-4" style="font-family: Product Sans, Arial; margin-bottom: 20px;">Don't Wait. </h2>
+                    <h2 class="display-4" style="font-family: Product Sans, Arial; margin-bottom: 20px;">You Can Do This!</h2>
+                    <p>Start Protesting Against All Violance! If you Protest, Then You Represent Bangladesh. Learn Self Defense from Today! So, Don't be late and be connected with us today!</p>
+                    <a button type="button" class="btn btn-danger btn-sm" href="tel:999">Call 999</a>
+                    <a button type="button" class="btn btn-primary btn-sm" href= "tel:109">Call 109</a>
+                    <button type="button" onclick="document.getElementById('id01').style.display='block'" class="btn btn-success btn-sm">Email Police</button>
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+
+    </main>
+
+
+
+
+
+
+    <footer class="py-5" style="background-color: #5a1b62; margin-top: 90px;">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; jogoronbd.000webhostapp.com</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>
+
+
+
+
+</section>
+</body>
+
+</html>

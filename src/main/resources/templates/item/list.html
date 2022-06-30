@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title>Item List</title>
+</head>
+<body>
+
+<section>
+  <br><br><br><br>
+  <br><br><br><br>
+
+  <h3>Items</h3>
+
+  <div class="float-end">
+    <a href="/item/new" type="button" class="btn btn-primary btn-lg">Add New Item</a>
+  </div>
+
+  <br><br>
+
+  <table class="table table-bordered" style="background-color:white">
+    <thead>
+    <tr>
+      <th>Category</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Logo</th>
+      <th>Photo</th>
+      <th>Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${items.empty}">
+      <td colspan="2">No Item Available</td>
+    </tr>
+    <tr th:each="item : ${items}">
+      <td><span th:text="${item.category?.name}">Category</span></td>
+      <td><span th:text="${item.name}">Name</span></td>
+      <td><span th:text="${item.description}">Description</span></td>
+      <td><span th:text="${item.logo}">Logo</span></td>
+      <td><span th:text="${item.image}">Photo</span></td>
+      <td><span th:text="${item.link}">Link</span></td>
+
+      <td>
+        <a th:href="@{'/item/edit/' + ${item.id}}">Edit</a>
+      </td>
+
+      <td>
+        <a th:href="@{'/item/delete/' + ${item.id}}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

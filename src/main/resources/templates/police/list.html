@@ -1,0 +1,321 @@
+<!doctype html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+       th:replace="layout :: layout(~{::title}, ~{::section})" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JagoronBD</title>
+</head>
+
+<body>
+<section>
+<main class="container">
+
+  <div class="row">
+
+    <div class="col-md-6" style="line-height: 30px">
+      <h1 class="display-3" style="font-family: Product Sans, Arial; margin-top: 20%";>Police Numbers</h1>
+      <h4 style="font-family: Product Sans, Arial; ">Collect All Thana Contact Numbers.</h4>
+      <p>Don't Wait for Others. Start Learning Self Defense From Today. Collect Necessary Elements for Self Defense. Enroll to Free Courses.
+        If Needed Then Call 999 (The National Emergency Number) Now!
+      </p>
+      <a button type="button" style="margin-top: 7px;" class="btn btn-danger " href="tel:999">Call 999</a>
+      <a button type="button" style="margin-top: 7px;" class="btn btn-primary " href="tel:109">Call 109</a>
+      <button type="button" style="margin-top: 7px;" onclick="document.getElementById('id01').style.display='block'" class="btn btn-success ">Contact Police</button>
+    </div>
+
+    <div id="id01" class="modal">
+
+      <form class="modal-content animate" action="action_page.php" method="post">
+
+
+        <div class="container2">
+          <label for="sub" style="color:black;"><b>Subject</b></label>
+          <input class="form-control" type="text" placeholder="Enter Subject"  name="subject" required>
+
+
+          <label for="eml" style="color:black;"><b>Email</b></label>
+
+          <input class="form-control" type="email" placeholder="Enter Your Email"  name="email" required  >
+
+
+          <label for="sms" style="color:black;"><b>Your Message</b></label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Your Email" name="message" required></textarea>
+          <button type="submit" class="btn btn-primary btn-sm btn-block" style="margin-top: 7px;">Send</button>
+
+
+
+
+
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1; height: 45px">
+
+
+
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn btn-danger btn-sm" style="margin-top: 7px;">Cancel</button>
+
+
+
+        </div>
+      </form>
+    </div>
+
+    <script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+
+    <div class="col-md-6" style="margin-top: 20px;">
+      <img src="police.svg" width="90%" alt="policebd">
+    </div></div>
+
+
+
+  <div id="dhaka" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Dhaka Division</h2>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="Screenshot_2020-10-10%20Google%20Maps.png" width="100%"alt="Dhakamap">
+      </div>
+      <div class=" col-lg-6" style="line-height: 30px">
+        <p>  DMP, Dhaka<br>
+          <div   th:each="police : ${dhaka}">
+          <span th:text="${police.phoneNumberNo}"></span>) <span th:text="${police.name}"></span>- <span th:text="${police.phoneNumber}"></span><br>
+          </div>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="outside_dhaka" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Outside Dhaka</h2>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+      <div class=" col-lg-6" style="line-height: 30px">
+        <div  th:each="outsideDhaka : ${outsideDhaka}">
+        <p>       <span th:text="${outsideDhaka.phoneNumberNo}"></span>) <span th:text="${outsideDhaka.name}"></span>- <span th:text="${outsideDhaka.phoneNumber}"></span><br>
+        </div>
+        </p>
+      </div>
+
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="outsidedhaka.png" width="100%"alt="map">
+      </div>
+    </div>
+  </div>
+
+  <div id="borishal" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Borishal Division</h2>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="Borishal.png" width="100%" alt="map">
+      </div>
+
+      <div class=" col-lg-6" style="line-height: 30px">
+        <div  th:each="borishal : ${borishalList}">
+          <p>       <span th:text="${borishal.phoneNumberNo}"></span>)
+            <span th:text="${borishal.name}"></span>-
+            <span th:text="${borishal.phoneNumber}"></span><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sylhet" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Sylhet Division</h2>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+      <div class=" col-lg-6" style="line-height: 30px">
+        <div  th:each="sylhet : ${sylhetList}">
+          <p>       <span th:text="${sylhet.phoneNumberNo}"></span>)
+            <span th:text="${sylhet.name}"></span>-
+            <span th:text="${sylhet.phoneNumber}"></span><br>
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="sylhet.png" width="100%"alt="map">
+      </div>
+    </div>
+  </div>
+
+  <div id="chittagong" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Chittagong Division</h2>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="chittagong.png" width="100%"alt="map" >
+      </div>
+      <div class=" col-lg-6" style="line-height: 30px">
+        <p>
+          DMP, Chittagong <br>
+        </p>
+
+        <div  th:each="chittagong : ${chittagongList}">
+          <p>       <span th:text="${chittagong.phoneNumberNo}"></span>)
+            <span th:text="${chittagong.name}"></span>-
+            <span th:text="${chittagong.phoneNumber}"></span><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="outside_chittagong" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Outside Chittagong</h2>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+      <div class=" col-lg-6" style="line-height: 30px">
+        <div  th:each="outsideChittagong : ${outsideChittagongList}">
+          <p>       <span th:text="${outsideChittagong.phoneNumberNo}"></span>)
+            <span th:text="${outsideChittagong.name}"></span>-
+            <span th:text="${outsideChittagong.phoneNumber}"></span><br>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="chittagong.png" width="100%"alt="map">
+      </div>
+
+    </div>
+  </div>
+
+  <div id="Khulna" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Khulna Division</h2>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="Khulna.png" width="100%"alt="map" >
+      </div>
+      <div class=" col-lg-6" style="line-height: 30px">
+        <p>
+          KMP, Khulna <br>
+          <br>
+
+        <div  th:each="khulna : ${khulnaList}">
+          <p>       <span th:text="${khulna.phoneNumberNo}"></span>)
+            <span th:text="${khulna.name}"></span>-
+            <span th:text="${khulna.phoneNumber}"></span><br>
+          </p>
+        </div>
+
+          OutSide Khulna<br><br>
+
+        <div  th:each="outsideKhulna : ${outsideKhulnaList}">
+          <p>       <span th:text="${outsideKhulna.phoneNumberNo}"></span>)
+            <span th:text="${outsideKhulna.name}"></span>-
+            <span th:text="${outsideKhulna.phoneNumber}"></span><br>
+          </p>
+        </div>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="Rajshahi" style=" margin-top: 40px;">
+    <div class="text-center mb-4 mt-4" >
+      <h2 class="display-4" style="font-family: Product Sans, Arial ;">Rajshahi Division</h2>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+
+
+      <div class=" col-lg-6" style="line-height: 30px">
+        <p>
+          RMP, Rajshahi <br><br>
+        <div  th:each="rajshahi : ${rajshahiList}">
+          <p>       <span th:text="${rajshahi.phoneNumberNo}"></span>)
+            <span th:text="${rajshahi.name}"></span>-
+            <span th:text="${rajshahi.phoneNumber}"></span><br>
+        </div>
+
+        OutSide Rajshahi<br><br>
+
+        <div  th:each="outsideRajshahi : ${outsideRajshahiList}">
+          <p>       <span th:text="${outsideRajshahi.phoneNumberNo}"></span>)
+            <span th:text="${outsideRajshahi.name}"></span>-
+            <span th:text="${outsideRajshahi.phoneNumber}"></span><br>
+        </div>
+
+        </p>
+
+      </div>
+      <div class="col-lg-6" style="line-height: 30px">
+        <img src="Rajshahi%20.png" width="100%"alt="map">
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id = "saythanks" style="margin-top: 100px;">
+
+    <div class="row">
+
+      <div class="col-lg-6" >
+        <img src="Wecando.svg" width="80%" alt="Banner">
+      </div>
+
+      <div class="col-lg-6" style="line-height: 30px;">
+        <h2 class="display-4" style="font-family: Product Sans, Arial; margin-bottom: 20px;">Don't Wait. </h2>
+        <h2 class="display-4" style="font-family: Product Sans, Arial; margin-bottom: 20px;">You Can Do This!</h2>
+        <p>Start Protesting Against All Violance! If you Protest, Then You Represent Bangladesh. Learn Self Defense from Today! So, Don't be late and be connected with us today!</p>
+        <a button type="button" class="btn btn-danger btn-sm" href="tel:999">Call 999</a>
+        <a button type="button" class="btn btn-primary btn-sm" href= "tel:109">Call 109</a>
+        <button type="button" onclick="document.getElementById('id01').style.display='block'" class="btn btn-success btn-sm">Email Police</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+</section>
+</body>
+
+<footer class="py-5" style="background-color: #5a1b62; margin-top: 90px;">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; jogoronbd.000webhostapp.com</p>
+  </div>
+  <!-- /.container -->
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>
+
+</html>

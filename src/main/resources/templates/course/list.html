@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Item List</title>
+</head>
+<body>
+
+<section>
+    <br><br><br><br>
+    <br><br><br><br>
+
+    <div class="float-end" sec:authorize="hasAuthority('ADMIN')">
+        <a href="/item/new" type="button" class="btn btn-primary btn-lg">Add New Course</a>
+    </div>
+
+    <div id="courses" style=" margin-top: 90px;"  th:fragment="course">
+        <div class="text-center mb-4 mt-4" >
+            <h2 class="display-4" style="font-family: Product Sans, Arial ; margin-bottom: 60px;">Specialized Courses</h2>
+        </div>
+        <div class="row" id="portfolio" >
+            <div class="col-md-6 col-lg-6" th:each="course : ${courseList}">
+                <div class="card mb-4 shadow-sm">
+                    <img th:src="${course.image}" height="300px" alt="Banner">
+                    <div class="card-body">
+                        <p class="card-text" th:text="${course.name}"></p>
+                        <p class="card-text" th:text="${course.description}"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <p sec:authorize="isAnonymous()"><a button type="button" class="btn btn-success btn-sm"  href="/login">Enrol now</a> </p>
+                                <p  sec:authorize="isAuthenticated()"><a button type="button" class="btn btn-success btn-sm" th:href="${course.link}" >Enrol Now</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

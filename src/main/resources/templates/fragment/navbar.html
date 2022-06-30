@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+</head>
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light  fixed-top" style="background-color: #5a1b62;box-shadow: 0px 4px 4px #ffffff; " th:fragment="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/" style="font-family: Product Sans, Arial; color: white;">Jagoron</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#courses" style="color: white">Courses</a>
+                    </li>
+                    <li class="nav-item">
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/police" style="color: white">Police Numbers</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="#Tutorials">Self Defense&nbsp; <i class="fa  fa-youtube-play" style="color:red;"></i></a>
+                    </li>
+                    <div>
+                    <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link" style="color: white" href="/admins"> ADMIN Panel</a>
+                    </li>
+                    </div>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
+                            More
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                            <a class="dropdown-item" href="#freepdfs">Free PDF Books</a>
+                            <a class="dropdown-item" href="#massage">A Massage</a>
+                            <a class="dropdown-item" href="#saythanks">Start Learning!</a>
+                        </div>
+                    </li>
+
+                </ul>
+
+
+                <div class="dropdown">
+                    <div class="d-flex align-items-center">
+                        <div sec:authorize="isAuthenticated()">
+                            Logged in as <strong sec:authentication="name"></strong><br>
+                            Role: <span sec:authentication="principal.authorities"></span>
+                            <form th:action="@{/logout}" method="post">
+                                <button><input type="submit" value="Sign Out"/></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="dropdown">
+                    <div class="d-flex align-items-center">
+                        <div sec:authorize="isAnonymous()">
+                            <a th:href="@{/login}">Login</a><br>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+</nav>
+
+
+</body>
+</html>

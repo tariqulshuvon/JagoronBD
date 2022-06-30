@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Item</title>
+</head>
+<body>
+<section>
+    <br><br><br><br>
+    <br><br><br><br>
+
+    <h3>Add New Item</h3>
+
+    <form action="#" th:action="@{/item/save}" method="post" th:object="${form}">
+        <input type="hidden" th:field="*{id}"/>
+
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Category</label>
+            <select class="form-select" th:field="*{categoryId}" id="category">
+                <option th:each="cat : ${categoryList}" th:value="${cat.id}" th:text="${cat.name}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Logo</label>
+            <input type="text" th:field="*{logo}" class="form-control" id="exampleInputEmail1"
+                   aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputImage" class="form-label">Image</label>
+            <input type="text" th:field="*{image}" class="form-control" id="exampleInputImage"
+                   aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+            <label for="mark" class="form-label">Name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="mark"
+                   aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" th:field="*{description}" class="form-control" id="description"
+                   aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="link" class="form-label">Link</label>
+            <input type="text" th:field="*{link}" class="form-control" id="link"
+                   aria-describedby="emailHelp">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Police Number</title>
+</head>
+<body>
+<section>
+    <br><br><br><br>
+    <br><br><br><br>
+
+    <h3>Add New Police Number</h3>
+
+    <form action="#" th:action="@{/policeNumber/save}" method="post" th:object="${form}">
+        <input type="hidden" th:field="*{id}"/>
+
+
+        <div class="mb-3">
+            <label for="division" class="form-label">Division</label>
+            <select class="form-select" th:field="*{divisionId}" id="division">
+                <option th:each="division : ${divisionList}" th:value="${division.id}" th:text="${division.name}"></option>
+            </select>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="serial" class="form-label">Phone Number Serial No.</label>
+            <input type="tel" th:field="*{phoneNumberNo}" class="form-control" id="serial"
+                   aria-describedby="emailHelp">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="mark" class="form-label">Name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="mark"
+                   aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Phone Number</label>
+            <input type="tel" th:field="*{phoneNumber}" class="form-control" id="description"
+                   aria-describedby="emailHelp">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+
+</body>
+</html>

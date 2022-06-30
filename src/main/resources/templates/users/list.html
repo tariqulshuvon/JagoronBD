@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<section>
+    <h3>Users</h3>
+
+    <div class="float-end">
+        <a href="/register" type="button" class="btn btn-primary btn-lg">Add New User</a>
+    </div>
+
+    <br><br>
+
+    <table class="table table-bordered" style="background-color:white">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Password</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${users.empty}">
+            <td colspan="2">No User Available</td>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.username}">Username</span></td>
+            <td><span th:text="${user.roles}">Role</span></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><span th:text="${user.password}">Password</span></td>
+
+
+<!--            <td sec:authorize="hasAuthority('ADMIN')">-->
+<!--                <a th:href="@{'/users/edit/' + ${user.id}}">Edit</a>-->
+<!--            </td>-->
+
+<!--            <td sec:authorize="hasAuthority('ADMIN')">-->
+<!--                <a th:href="@{'/users/delete/' + ${user.id}}">Delete</a>-->
+<!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
